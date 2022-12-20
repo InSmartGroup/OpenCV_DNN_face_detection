@@ -54,12 +54,13 @@ while True:
         confidence = detections[0, 0, i, 2]
 
         if confidence > detection_threshold:
+
             # Extract the bounding box coordinates from the detection
             box = detections[0, 0, i, 3:7] * np.array([width, height, width, height])
             (x1, y1, x2, y2) = box.astype('int')
 
             # Annotate the frame with results
-            cv2.rectangle(frame, (x1, y2), (x2, y2), (0, 255, 255), 2)
+            cv2.rectangle(frame, (x1, y1), (x2, y2), (0, 255, 255), 2)
             label = 'Confidence: %.4f' % confidence
             label_size, base_line = cv2.getTextSize(label, font_style, font_scale, font_thickness)
             cv2.rectangle(frame, (x1, y1 - label_size[1]), (x1 + label_size[0], y1 + base_line),
